@@ -2,7 +2,7 @@ package test
 
 import (
 	"encoding/json"
-	"github.com/json-iterator/go"
+	"github.com/sevico/jsonIter"
 	"testing"
 	"unicode/utf8"
 )

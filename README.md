@@ -1,8 +1,8 @@
-[![Sourcegraph](https://sourcegraph.com/github.com/json-iterator/go/-/badge.svg)](https://sourcegraph.com/github.com/json-iterator/go?badge)
-[![GoDoc](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)](https://pkg.go.dev/github.com/json-iterator/go)
+[![Sourcegraph](https://sourcegraph.com/github.com/sevico/jsonIter/-/badge.svg)](https://sourcegraph.com/github.com/sevico/jsonIter?badge)
+[![GoDoc](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)](https://pkg.go.dev/github.com/sevico/jsonIter)
 [![Build Status](https://travis-ci.org/json-iterator/go.svg?branch=master)](https://travis-ci.org/json-iterator/go)
 [![codecov](https://codecov.io/gh/json-iterator/go/branch/master/graph/badge.svg)](https://codecov.io/gh/json-iterator/go)
-[![rcard](https://goreportcard.com/badge/github.com/json-iterator/go)](https://goreportcard.com/report/github.com/json-iterator/go)
+[![rcard](https://goreportcard.com/badge/github.com/sevico/jsonIter)](https://goreportcard.com/report/github.com/sevico/jsonIter)
 [![License](http://img.shields.io/badge/license-mit-blue.svg?style=flat-square)](https://raw.githubusercontent.com/json-iterator/go/master/LICENSE)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/json-iterator/Lobby)
 
@@ -14,7 +14,7 @@ You can also use thrift like JSON using [thrift-iterator](https://github.com/thr
 
 ![benchmark](http://jsoniter.com/benchmarks/go-benchmark.png)
 
-Source code: https://github.com/json-iterator/go-benchmark/blob/master/src/github.com/json-iterator/go-benchmark/benchmark_medium_payload_test.go
+Source code: https://github.com/sevico/jsonIter-benchmark/blob/master/src/github.com/sevico/jsonIter-benchmark/benchmark_medium_payload_test.go
 
 Raw Result (easyjson requires static code generation)
 
@@ -44,7 +44,7 @@ json.Marshal(&data)
 with
 
 ```go
-import jsoniter "github.com/json-iterator/go"
+import jsoniter "github.com/sevico/jsonIter"
 
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
 json.Marshal(&data)
@@ -60,7 +60,7 @@ json.Unmarshal(input, &data)
 with
 
 ```go
-import jsoniter "github.com/json-iterator/go"
+import jsoniter "github.com/sevico/jsonIter"
 
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
 json.Unmarshal(input, &data)
@@ -71,7 +71,7 @@ json.Unmarshal(input, &data)
 # How to get
 
 ```
-go get github.com/json-iterator/go
+go get github.com/sevico/jsonIter
 ```
 
 # Contribution Welcomed !

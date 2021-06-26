@@ -3,7 +3,7 @@ package skip_tests
 import (
 	"encoding/json"
 	"errors"
-	"github.com/json-iterator/go"
+	"github.com/sevico/jsonIter"
 	"github.com/stretchr/testify/require"
 	"io"
 	"reflect"

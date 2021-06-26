@@ -3,7 +3,7 @@ package any_tests
 import (
 	"testing"
 
-	"github.com/json-iterator/go"
+	"github.com/sevico/jsonIter"
 	"github.com/stretchr/testify/require"
 )
 
