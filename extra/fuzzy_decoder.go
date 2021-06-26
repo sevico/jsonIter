@@ -20,6 +20,7 @@ const minInt = -maxInt - 1
 // It will handle string/number auto conversation, and treat empty [] as empty struct.
 func RegisterFuzzyDecoders() {
 	jsoniter.RegisterExtension(&tolerateEmptyArrayExtension{})
+	jsoniter.RegisterExtension(&tolerateEmptyStringAsArrayExtension{})
 	jsoniter.RegisterTypeDecoder("string", &fuzzyStringDecoder{})
 	jsoniter.RegisterTypeDecoder("float32", &fuzzyFloat32Decoder{})
 	jsoniter.RegisterTypeDecoder("float64", &fuzzyFloat64Decoder{})
@@ -149,11 +150,37 @@ type tolerateEmptyArrayExtension struct {
 	jsoniter.DummyExtension
 }
 
+type tolerateEmptyStringAsArrayExtension struct {
+	jsoniter.DummyExtension
+}
+
 func (extension *tolerateEmptyArrayExtension) DecorateDecoder(typ reflect2.Type, decoder jsoniter.ValDecoder) jsoniter.ValDecoder {
 	if typ.Kind() == reflect.Struct || typ.Kind() == reflect.Map {
 		return &tolerateEmptyArrayDecoder{decoder}
 	}
 	return decoder
+}
+
+func (extension tolerateEmptyStringAsArrayExtension) DecorateDecoder(typ reflect2.Type, decoder jsoniter.ValDecoder) jsoniter.ValDecoder {
+	if typ.Kind()==reflect.Slice || typ.Kind()==reflect.Array{
+		return &tolerateEmptyStringAsArrayDecoder{decoder}
+	}
+	return decoder
+}
+
+type tolerateEmptyStringAsArrayDecoder struct {
+	valDecoder jsoniter.ValDecoder
+}
+
+func (decoder *tolerateEmptyStringAsArrayDecoder) Decode(ptr unsafe.Pointer, iter *jsoniter.Iterator) {
+	if iter.WhatIsNext() == jsoniter.StringValue && iter.ReadString()==""{
+		iter.Skip()
+		newIter := iter.Pool().BorrowIterator([]byte("[]"))
+		defer iter.Pool().ReturnIterator(newIter)
+		decoder.valDecoder.Decode(ptr, newIter)
+	}else{
+		decoder.valDecoder.Decode(ptr, iter)
+	}
 }
 
 type tolerateEmptyArrayDecoder struct {
