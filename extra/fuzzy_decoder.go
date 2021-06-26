@@ -173,7 +173,7 @@ type tolerateEmptyStringAsArrayDecoder struct {
 }
 
 func (decoder *tolerateEmptyStringAsArrayDecoder) Decode(ptr unsafe.Pointer, iter *jsoniter.Iterator) {
-	if iter.WhatIsNext() == jsoniter.StringValue && iter.ReadString()==""{
+	if iter.WhatIsNext() == jsoniter.StringValue{
 		iter.Skip()
 		newIter := iter.Pool().BorrowIterator([]byte("[]"))
 		defer iter.Pool().ReturnIterator(newIter)
